@@ -1,0 +1,1 @@
+./gradlew clean -PmainClass=edu.xyz.cs.analysis.RunExperiment run --args="/Users/mattia/Faculty/Research/test_mocking_refactoring/repositories/test_mocking_refactoring/analysis_tools/config/config_run_customized_mockito_mattia_laptop.txt"
