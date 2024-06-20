@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
 }
 
-group 'edu.xyz.cs'
+group 'edu.umn.cs'
 version '1.0'
 
 java {
@@ -16,7 +16,7 @@ java {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'edu.xyz.cs.analysis.CollectDepInfo'
+        attributes 'Main-Class': 'edu.umn.cs.analysis.CollectDepInfo'
     }
 
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } } {
