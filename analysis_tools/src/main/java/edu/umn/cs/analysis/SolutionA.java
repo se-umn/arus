@@ -22,7 +22,7 @@ import java.util.*;
 
 public class SolutionA {
 
-    public static Set<String> fixUnusedStubs(List<TestAnalysis> testAnalyses, Set<String> javaFileNamesInTestsFolder, AnalysisStatistics analysisStatistics, boolean without_setup) throws IOException {
+    public static Set<String> fixUnusedStubs(List<TestAnalysis> testAnalyses, Set<String> javaFileNamesInTestsFolder, AnalysisStatistics analysisStatistics, boolean remove_uus) throws IOException {
         FixUnusedStubsState  fixUnusedStubsState = new FixUnusedStubsState();
         int insertIfStatementsCount = 0;
         int addedTestCount = 0;
@@ -159,7 +159,7 @@ public class SolutionA {
 
                 //gather case2,3,4 information
                 else if (info.getType() == 2){
-                    if(!without_setup){
+                    if(remove_uus){
                         for(String key: info.getSolATestAnalysesMap().keySet()){
                         for(String singleTA: info.getSolATestAnalysesMap().get(key)){
                             Pair<String, String> pair = new Pair(singleTA, key);
@@ -419,7 +419,7 @@ public class SolutionA {
                 Files.write(new File(fileName).toPath(), Collections.singleton(cu.toString()), StandardCharsets.UTF_8);
                 fixUnusedStubsState.getChangedFilesName().add(fileName.replace("_experiment", ""));
             }
-            if(!without_setup){
+            if(remove_uus){
                 //////special repo 2 needs to be handled separately
                 if(fileName.contains("jenkinsci_chucknorris-plugin_experiment/src/test/java/hudson/plugins/chucknorris/RoundhouseActionTest.java")){
 //                System.out.println("Needs to be DELETED"+ fileName);

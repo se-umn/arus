@@ -12,7 +12,7 @@ import java.util.*;
 
 public class SolutionC {
 
-    public static Set<String> fixUnusedStubs(List<TestAnalysis> testAnalyses, Set<String> javaFileNamesInTestsFolder, AnalysisStatistics analysisStatistics, boolean without_setup) throws IOException {
+    public static Set<String> fixUnusedStubs(List<TestAnalysis> testAnalyses, Set<String> javaFileNamesInTestsFolder, AnalysisStatistics analysisStatistics, boolean remove_uus) throws IOException {
         FixUnusedStubsState  fixUnusedStubsState = new FixUnusedStubsState();
         fixUnusedStubsState.setSolutionOption(3);
         int insertIfStatementsCount = 0;
@@ -21,7 +21,7 @@ public class SolutionC {
 
 
         if(fixUnusedStubsState.isusInMultipleCase()){
-            SolutionA.fixUnusedStubs(testAnalyses,javaFileNamesInTestsFolder,analysisStatistics, without_setup);
+            SolutionA.fixUnusedStubs(testAnalyses,javaFileNamesInTestsFolder,analysisStatistics, remove_uus);
             return fixUnusedStubsState.getChangedFilesName();
         }
 

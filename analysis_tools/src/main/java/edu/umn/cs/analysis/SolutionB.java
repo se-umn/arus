@@ -22,7 +22,7 @@ import java.util.*;
 
 public class SolutionB {
 
-    public static Set<String> fixUnusedStubs(List<TestAnalysis> testAnalyses, Set<String> javaFileNamesInTestsFolder, AnalysisStatistics analysisStatistics, boolean without_setup) throws IOException {
+    public static Set<String> fixUnusedStubs(List<TestAnalysis> testAnalyses, Set<String> javaFileNamesInTestsFolder, AnalysisStatistics analysisStatistics, boolean remove_uus) throws IOException {
         FixUnusedStubsState  fixUnusedStubsState = new FixUnusedStubsState();
         fixUnusedStubsState.setSolutionOption(2);
         int insertIfStatementsCount = 0;
@@ -32,7 +32,7 @@ public class SolutionB {
         List<ChangeInfo> ChangeInfoList = SolutionB.identifyUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, fixUnusedStubsState, analysisStatistics);
 
         if(fixUnusedStubsState.isusInMultipleCase()){
-            SolutionA.fixUnusedStubs(testAnalyses,javaFileNamesInTestsFolder,analysisStatistics,without_setup);
+            SolutionA.fixUnusedStubs(testAnalyses,javaFileNamesInTestsFolder,analysisStatistics,remove_uus);
             return fixUnusedStubsState.getChangedFilesName();
         }
 

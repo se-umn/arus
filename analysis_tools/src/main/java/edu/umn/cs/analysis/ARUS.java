@@ -35,7 +35,6 @@ import com.opencsv.CSVWriter;
 
 
 public class ARUS{
-
   private static String REPO_FULL_PATH = "";
   private static String REPO_NAME="";
   private static String RESULTS_FILE_NAME = "";
@@ -44,7 +43,7 @@ public class ARUS{
   private static String ADDITIONAL_FILES_FOLDER_NAME = "";
   private static int TEST_EXECUTION_REPETITIONS = 3;
   private static int SOLUTION_NUMBER = 1;
-  private static boolean WITHOUT_SETUP = false;
+  private static boolean REMOVE_UUS = true;
 
   private Set<String> relevantRepos = new HashSet<>();
   private boolean cloneRepo = true;
@@ -72,7 +71,7 @@ public class ARUS{
       }
       if (args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false")) {
         // The user has provided the boolean flag only
-        WITHOUT_SETUP = Boolean.parseBoolean(args[2]);
+        REMOVE_UUS = Boolean.parseBoolean(args[2]);
       }
       else{
         System.out.println("Invalid argument. The third argument must be a boolean.");
@@ -571,7 +570,7 @@ public class ARUS{
         dir.mkdirs();
       }
       File outputFile = new File(dir,ARUS.REPO_NAME.replace("/", "-")+".txt");
-      System.out.println(outputFile.getAbsolutePath());
+//      System.out.println(outputFile.getAbsolutePath());
       try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
         for (String key : sortedKeys) {
 //          System.out.println(key + " -> " + usmap.get(key));
@@ -698,13 +697,13 @@ public class ARUS{
           case 1:
             /////////////////////collect case numbers////////////////////
             SolutionB.identifyUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, new FixUnusedStubsState(), analysisStatistics);
-            SolutionA.fixUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, analysisStatistics, WITHOUT_SETUP);
+            SolutionA.fixUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, analysisStatistics, REMOVE_UUS);
             break;
           case 2:
-            SolutionB.fixUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, analysisStatistics,WITHOUT_SETUP);
+            SolutionB.fixUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, analysisStatistics,REMOVE_UUS);
             break;
           case 3:
-            SolutionC.fixUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, analysisStatistics,WITHOUT_SETUP);
+            SolutionC.fixUnusedStubs(testAnalyses, javaFileNamesInTestsFolder, analysisStatistics,REMOVE_UUS);
             break;
         }
 
